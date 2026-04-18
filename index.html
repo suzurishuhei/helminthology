@@ -387,6 +387,8 @@
         </div>
 
         <nav class="lecture-nav">
+            <a href="#syllabus" onclick="showSyllabus()">Syllabus</a>
+            <span style="padding: 8px 15px; background: #e74c3c; color: white; border-radius: 20px; font-weight: bold; font-size: 0.85em;">⚠️ Cestodes Start</span>
             <a href="#lec1" onclick="showLecture(1)">Lec #1</a>
             <a href="#lec2" onclick="showLecture(2)">Lec #2</a>
             <a href="#lec3" onclick="showLecture(3)">Lec #3</a>
@@ -407,12 +409,190 @@
             <a href="#lec17" onclick="showLecture(17)">Lec #17</a>
             <a href="#lec18" onclick="showLecture(18)">Lec #18</a>
             <a href="#lec19" onclick="showLecture(19)">Lec #19</a>
+            <span style="padding: 8px 15px; background: #e74c3c; color: white; border-radius: 20px; font-weight: bold; font-size: 0.85em;">⚠️ Nematodes Start</span>
             <a href="#lec20" onclick="showLecture(20)">Lec #20</a>
             <a href="#lec21" onclick="showLecture(21)">Lec #21</a>
-            <span style="padding: 8px 15px; background: #e74c3c; color: white; border-radius: 20px; font-weight: bold; font-size: 0.85em;">⚠️ Nematodes Start</span>
-            <a href="#syllabus" onclick="showSyllabus()">Syllabus</a>
             <a href="#summary" onclick="showSummary()">Summary</a>
         </nav>
+
+        <!-- SYLLABUS SECTION -->
+        <section id="syllabus" class="lecture-section">
+            <div class="lecture-header" onclick="toggleSyllabus()">
+                <h2>📊 COURSE SYLLABUS</h2>
+                <div class="meta">Outline of Cestodes, Trematodes, and Nematodes coverage</div>
+            </div>
+            <div class="lecture-content" id="content-syllabus">
+
+                <h3>IMPORTANT NOTES FOR STUDENTS</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Topic</th>
+                        <th>Coverage Status</th>
+                    </tr>
+                    <tr>
+                        <td>Cestodes</td>
+                        <td>✅ Covered in physical classes (Lectures #1-12)</td>
+                    </tr>
+                    <tr>
+                        <td>Trematodes</td>
+                        <td>✅ Covered in online lectures (Lectures #13-19)</td>
+                    </tr>
+                    <tr>
+                        <td>Nematodes</td>
+                        <td>🔄 To be continued along with these topics (Lectures #20-21)</td>
+                    </tr>
+                </table>
+
+                <h3>CESTODA</h3>
+                <table>
+                    <tr>
+                        <th>Level</th>
+                        <th>Topic</th>
+                    </tr>
+                    <tr>
+                        <td>Class</td>
+                        <td>CESTODA</td>
+                    </tr>
+                    <tr>
+                        <td>Order</td>
+                        <td>CYCLOPHYLLIDEA</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>TAENIIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>ANOPLOCEPHALIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>DILEPIDIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>DAVAINEIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>HYMENOLEPIDIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>MESOCESTOIDIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>THYSANOSOMIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Order</td>
+                        <td>PSEUDOPHYLLIDEA</td>
+                    </tr>
+                </table>
+
+                <h3>TREMATODA</h3>
+                <table>
+                    <tr>
+                        <th>Level</th>
+                        <th>Topic</th>
+                    </tr>
+                    <tr>
+                        <td>Class</td>
+                        <td>TREMATODA</td>
+                    </tr>
+                    <tr>
+                        <td>Subclass</td>
+                        <td>DIGENEA</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>FASCIOLIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>DICROCOELIIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>PARAMPHISTOMATIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>TROGLOTREMATIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>OPISTHORCHIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>SCHISTOSOMATIDAE</td>
+                    </tr>
+                    <tr>
+                        <td>Family</td>
+                        <td>DIPLOSTOMATIDAE</td>
+                    </tr>
+                </table>
+
+                <h3>NEMATHELMINTHES</h3>
+                <table>
+                    <tr>
+                        <th>Level</th>
+                        <th>Topic</th>
+                    </tr>
+                    <tr>
+                        <td>Phylum</td>
+                        <td>NEMATHELMINTHES</td>
+                    </tr>
+                    <tr>
+                        <td>Class</td>
+                        <td>NEMATODA</td>
+                    </tr>
+                    <tr>
+                        <td>Superfamily</td>
+                        <td>TRICHOSTRONGYLOIDEA</td>
+                    </tr>
+                    <tr>
+                        <td>Superfamily</td>
+                        <td>STRONGYLOIDEA</td>
+                    </tr>
+                    <tr>
+                        <td>Superfamily</td>
+                        <td>METASTRONGYLOIDEA</td>
+                    </tr>
+                    <tr>
+                        <td>Superfamily</td>
+                        <td>RHABDITOIDEA</td>
+                    </tr>
+                    <tr>
+                        <td>Superfamily</td>
+                        <td>ASCARIDOIDEA</td>
+                    </tr>
+                    <tr>
+                        <td>Superfamily</td>
+                        <td>OXYUROIDEA</td>
+                    </tr>
+                    <tr>
+                        <td>Superfamily</td>
+                        <td>SPIRUROIDEA</td>
+                    </tr>
+                    <tr>
+                        <td>Superfamily</td>
+                        <td>FILARIOIDEA</td>
+                    </tr>
+                    <tr>
+                        <td>Superfamily</td>
+                        <td>TRICHUROIDEA</td>
+                    </tr>
+                    <tr>
+                        <td>Superfamily</td>
+                        <td>DIOCTOPHYMATOIDEA</td>
+                    </tr>
+                </table>
+
+            </div>
+        </section>
 
         <!-- LECTURE #1 -->
         <section id="lec1" class="lecture-section">
@@ -7063,185 +7243,6 @@ Snail -&gt; Crustacean -&gt; Lizard -&gt; Cat
                 <div class="warning-box">
                     <strong>⚠️ IMPORTANT:</strong> Nematodes content covered in these 2 lectures (Lectures #20-21). This concludes the Nematodes section of the course.
                 </div>
-
-            </div>
-        </section>
-
-        <!-- SYLLABUS SECTION -->
-        <section id="syllabus" class="lecture-section">
-            <div class="lecture-header" onclick="toggleSyllabus()">
-                <h2>📊 COURSE SYLLABUS</h2>
-                <div class="meta">Outline of Cestodes, Trematodes, and Nematodes coverage</div>
-            </div>
-            <div class="lecture-content" id="content-syllabus">
-
-                <h3>CESTODA</h3>
-                <table>
-                    <tr>
-                        <th>Level</th>
-                        <th>Topic</th>
-                    </tr>
-                    <tr>
-                        <td>Class</td>
-                        <td>CESTODA</td>
-                    </tr>
-                    <tr>
-                        <td>Order</td>
-                        <td>CYCLOPHYLLIDEA</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>TAENIIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>ANOPLOCEPHALIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>DILEPIDIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>DAVAINEIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>HYMENOLEPIDIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>MESOCESTOIDIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>THYSANOSOMIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Order</td>
-                        <td>PSEUDOPHYLLIDEA</td>
-                    </tr>
-                </table>
-
-                <h3>TREMATODA</h3>
-                <table>
-                    <tr>
-                        <th>Level</th>
-                        <th>Topic</th>
-                    </tr>
-                    <tr>
-                        <td>Class</td>
-                        <td>TREMATODA</td>
-                    </tr>
-                    <tr>
-                        <td>Subclass</td>
-                        <td>DIGENEA</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>FASCIOLIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>DICROCOELIIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>PARAMPHISTOMATIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>TROGLOTREMATIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>OPISTHORCHIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>SCHISTOSOMATIDAE</td>
-                    </tr>
-                    <tr>
-                        <td>Family</td>
-                        <td>DIPLOSTOMATIDAE</td>
-                    </tr>
-                </table>
-
-                <h3>NEMATHELMINTHES</h3>
-                <table>
-                    <tr>
-                        <th>Level</th>
-                        <th>Topic</th>
-                    </tr>
-                    <tr>
-                        <td>Phylum</td>
-                        <td>NEMATHELMINTHES</td>
-                    </tr>
-                    <tr>
-                        <td>Class</td>
-                        <td>NEMATODA</td>
-                    </tr>
-                    <tr>
-                        <td>Superfamily</td>
-                        <td>TRICHOSTRONGYLOIDEA</td>
-                    </tr>
-                    <tr>
-                        <td>Superfamily</td>
-                        <td>STRONGYLOIDEA</td>
-                    </tr>
-                    <tr>
-                        <td>Superfamily</td>
-                        <td>METASTRONGYLOIDEA</td>
-                    </tr>
-                    <tr>
-                        <td>Superfamily</td>
-                        <td>RHABDITOIDEA</td>
-                    </tr>
-                    <tr>
-                        <td>Superfamily</td>
-                        <td>ASCARIDOIDEA</td>
-                    </tr>
-                    <tr>
-                        <td>Superfamily</td>
-                        <td>OXYUROIDEA</td>
-                    </tr>
-                    <tr>
-                        <td>Superfamily</td>
-                        <td>SPIRUROIDEA</td>
-                    </tr>
-                    <tr>
-                        <td>Superfamily</td>
-                        <td>FILARIOIDEA</td>
-                    </tr>
-                    <tr>
-                        <td>Superfamily</td>
-                        <td>TRICHUROIDEA</td>
-                    </tr>
-                    <tr>
-                        <td>Superfamily</td>
-                        <td>DIOCTOPHYMATOIDEA</td>
-                    </tr>
-                </table>
-
-                <h3>IMPORTANT NOTES FOR STUDENTS</h3>
-                <table class="comparison-table">
-                    <tr>
-                        <th>Topic</th>
-                        <th>Coverage Status</th>
-                    </tr>
-                    <tr>
-                        <td>Cestodes</td>
-                        <td>✅ Covered in physical classes (Lectures #1-12)</td>
-                    </tr>
-                    <tr>
-                        <td>Trematodes</td>
-                        <td>✅ Covered in online lectures (Lectures #13-19)</td>
-                    </tr>
-                    <tr>
-                        <td>Nematodes</td>
-                        <td>🔄 To be continued along with these topics (Lectures #20-21)</td>
-                    </tr>
-                </table>
 
             </div>
         </section>
