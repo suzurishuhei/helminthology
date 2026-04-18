@@ -72,6 +72,126 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
+
+        .quiz-question {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 18px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            animation: quizCardIn 0.35s ease;
+            transform-origin: center;
+        }
+
+        .quiz-question h4 {
+            margin-bottom: 10px;
+            color: #1e3c72;
+        }
+
+        .quiz-options label {
+            display: block;
+            margin: 8px 0;
+            padding: 8px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .quiz-options label:hover {
+            background: #eef2ff;
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .quiz-btn {
+            border: none;
+            border-radius: 25px;
+            padding: 12px 22px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-btn.primary {
+            background: #1e8449;
+            color: white;
+        }
+
+        .quiz-btn.secondary {
+            background: #dfe6ff;
+            color: #1e3c72;
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .quiz-result {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .quiz-result.show {
+            display: block;
+        }
+
+        .quiz-result.pass {
+            background: #eafaf1;
+            border-left: 5px solid #27ae60;
+            color: #145a32;
+        }
+
+        .quiz-result.fail {
+            background: #fdecea;
+            border-left: 5px solid #c0392b;
+            color: #7b241c;
+        }
+
+        .quiz-progress {
+            margin: 12px 0 18px;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .quiz-status {
+            margin-top: 12px;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .quiz-question.is-exiting {
+            animation: quizCardOut 0.22s ease forwards;
+        }
+
+        @keyframes quizCardIn {
+            from {
+                opacity: 0;
+                transform: translateX(18px) scale(0.99);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        @keyframes quizCardOut {
+            from {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-18px) scale(0.99);
+            }
+        }
         
         .lecture-section {
             background: white;
@@ -375,7 +495,7 @@
         <header>
             <h1>🐛 Veterinary Helminthology</h1>
             <p>Complete Course Notes - DVM 4th Semester</p>
-            <p>Dr Ghulam Murtaza</p>
+            <p>Dr. Ghulam Murtaza</p>
             <p>Lecturer, FVAS, Gomal University</p>
             <p>Session 2024-2029 | Group A+B</p>
         </header>
@@ -413,6 +533,7 @@
             <span style="padding: 8px 15px; background: #e74c3c; color: white; border-radius: 20px; font-weight: bold; font-size: 0.85em;">⚠️ Nematodes Start</span>
             <a href="#lec20" onclick="showLecture(20)">Lec #20</a>
             <a href="#lec21" onclick="showLecture(21)">Lec #21</a>
+            <a href="#quiz" onclick="showQuiz()">Quiz</a>
             <a href="#summary" onclick="showSummary()">Summary</a>
         </nav>
 
@@ -7367,10 +7488,34 @@ Snail -&gt; Crustacean -&gt; Lizard -&gt; Cat
             </div>
         </section>
 
+        <!-- QUIZ SECTION -->
+        <section id="quiz" class="lecture-section">
+            <div class="lecture-header" onclick="toggleQuiz()">
+                <h2>📝 COURSE QUIZ</h2>
+            </div>
+            <div class="lecture-content" id="content-quiz">
+                <h3>HELMINTHOLOGY FINAL PRACTICE QUIZ</h3>
+                <form id="quiz-form">
+                    <div id="quiz-progress" class="quiz-progress"></div>
+                    <div id="quiz-questions"></div>
+                    <div id="quiz-status" class="quiz-status"></div>
+                    <div class="quiz-actions">
+                        <button type="button" class="quiz-btn secondary" onclick="previousQuestion()">Previous</button>
+                        <button type="button" class="quiz-btn primary" onclick="nextQuestion()">Next</button>
+                        <button type="button" class="quiz-btn primary" onclick="submitQuiz()">Submit Quiz</button>
+                        <button type="button" class="quiz-btn secondary" onclick="generateNewTest()">New Test</button>
+                        <button type="button" class="quiz-btn secondary" onclick="resetQuiz()">Reset Answers</button>
+                    </div>
+                </form>
+
+                <div id="quiz-result" class="quiz-result"></div>
+            </div>
+        </section>
+
         <footer>
             <p><strong>Veterinary Helminthology Study Guide</strong></p>
             <p>DVM 4th Semester | Session 2024-2029 | Group A+B</p>
-            <p>Dr Ghulam Murtaza | Lecturer, FVAS, Gomal University</p>
+            <p>Dr. Ghulam Murtaza | Lecturer, FVAS, Gomal University</p>
             <p>Helminthology Lectures #1 to 21</p>
         </footer>
     </div>
@@ -7393,6 +7538,7 @@ Snail -&gt; Crustacean -&gt; Lizard -&gt; Cat
             }
             document.getElementById('content-summary').classList.remove('active');
             document.getElementById('content-syllabus').classList.remove('active');
+            document.getElementById('content-quiz').classList.remove('active');
             
             // Show selected
             const selectedContent = document.getElementById('content-' + num);
@@ -7425,6 +7571,7 @@ Snail -&gt; Crustacean -&gt; Lizard -&gt; Cat
                 }
             }
             document.getElementById('content-summary').classList.remove('active');
+            document.getElementById('content-quiz').classList.remove('active');
             document.getElementById('content-syllabus').classList.add('active');
             document.getElementById('syllabus').scrollIntoView({behavior: 'smooth'});
         }
@@ -7440,12 +7587,348 @@ Snail -&gt; Crustacean -&gt; Lizard -&gt; Cat
             
             // Show summary
             document.getElementById('content-syllabus').classList.remove('active');
+            document.getElementById('content-quiz').classList.remove('active');
             document.getElementById('content-summary').classList.add('active');
             document.getElementById('summary').scrollIntoView({behavior: 'smooth'});
+        }
+
+        function toggleQuiz() {
+            const content = document.getElementById('content-quiz');
+            content.classList.toggle('active');
+        }
+
+        function showQuiz() {
+            for(let i=1; i<=21; i++) {
+                const content = document.getElementById('content-' + i);
+                if (content) {
+                    content.classList.remove('active');
+                }
+            }
+            document.getElementById('content-syllabus').classList.remove('active');
+            document.getElementById('content-summary').classList.remove('active');
+            document.getElementById('content-quiz').classList.add('active');
+            document.getElementById('quiz').scrollIntoView({behavior: 'smooth'});
+        }
+
+        const quizBank = [];
+        let activeQuizQuestions = [];
+        let currentQuizIndex = 0;
+        let userQuizAnswers = [];
+        let quizAutoAdvanceTimer = null;
+
+        function addQuestion(question, options, answer) {
+            quizBank.push({ question, options, answer });
+        }
+
+        function buildQuizBank() {
+            const helminthFacts = [
+                ['Helminthology is the study of', 'Parasitic worms', ['Viruses', 'Fungi', 'Protozoa']],
+                ['Helminthes are mainly', 'Endoparasites', ['Photosynthetic organisms', 'Bacteria', 'Free-living arthropods']],
+                ['Predilection site means', 'Preferred site of the parasite in the host', ['Drug of choice', 'External vector only', 'Stage outside the body']],
+                ['Platyhelminthes are usually', 'Dorso-ventrally flattened', ['Cylindrical', 'Segmented insects', 'Radially symmetrical']],
+                ['Nematodes are usually', 'Cylindrical and unsegmented', ['Flat and leaf-like', 'Segmented like annelids', 'Without digestive tract']],
+                ['Acanthocephala are known as', 'Thorny-headed worms', ['Blood flukes', 'Roundworms', 'Liver tapeworms']],
+                ['Cestodes generally lack', 'A digestive system', ['A scolex', 'Reproductive organs', 'A tegument']],
+                ['Trematodes usually possess', 'Oral and ventral suckers', ['Hooks only', 'Jointed limbs', 'A segmented body']],
+                ['Most platyhelminths are', 'Hermaphrodites', ['Strictly dioecious males only', 'Plants', 'Arthropods']],
+                ['Nematodes usually have', 'Separate sexes', ['Only female worms', 'No reproductive organs', 'Hermaphrodite segments']]
+            ];
+
+            const cestodeFacts = [
+                ['The head of a tapeworm is called the', 'Scolex', ['Redia', 'Miracidium', 'Bursa']],
+                ['The body segments of cestodes are', 'Proglottids', ['Cercariae', 'Metacercariae', 'Miracidia']],
+                ['Cyclophyllidean eggs contain the', 'Onchosphere', ['Miracidium', 'Rhabditiform larva', 'Microfilaria']],
+                ['Taenia saginata uses which intermediate host?', 'Cattle', ['Sheep', 'Dog', 'Horse']],
+                ['Echinococcus is important because it causes', 'Hydatid disease', ['Lungworm disease', 'Ascariasis only', 'Tick fever']],
+                ['Pseudophyllidean eggs are usually', 'Operculated', ['Hexacanth-free', 'Spineless cysts', 'Without shell']],
+                ['Bird tapeworms are heavily represented in family', 'Davaineidae', ['Schistosomatidae', 'Fasciolidae', 'Filarioidea']],
+                ['Moniezia belongs to family', 'Anoplocephalidae', ['Taeniidae', 'Dicrocoeliidae', 'Opisthorchiidae']],
+                ['Dipylidium is commonly associated with', 'Dogs and cats', ['Cattle only', 'Sheep liver', 'Fish gills']],
+                ['Taenia multiceps causes', 'Coenurosis (gid)', ['Fasciolosis', 'Haemonchosis', 'Schistosomosis']]
+            ];
+
+            const trematodeFacts = [
+                ['Fasciola hepatica is commonly called', 'Liver fluke', ['Rumen fluke', 'Pinworm', 'Whipworm']],
+                ['The intermediate host of Fasciola is a', 'Freshwater snail', ['Fish', 'Lizard', 'Tick']],
+                ['The infective stage of Fasciola on plants is', 'Metacercaria', ['Miracidium', 'Sporocyst', 'Egg']],
+                ['The drug of choice for fasciolosis is', 'Triclabendazole', ['Ivermectin', 'Piperazine', 'Nitroscanate']],
+                ['Dicrocoelium dendriticum is called the', 'Lancet fluke', ['Barber pole worm', 'Beef tapeworm', 'Blood nematode']],
+                ['The second intermediate host of Dicrocoelium is', 'Ant', ['Fish', 'Mosquito', 'Earthworm']],
+                ['Paramphistomatidae are usually called', 'Rumen flukes', ['Lungworms', 'Whipworms', 'Hookworms']],
+                ['Opisthorchiids are commonly acquired from', 'Freshwater fish', ['Grass only', 'Dog fur', 'Ticks']],
+                ['Schistosomes are unusual trematodes because they are', 'Dioecious', ['Segmented', 'Without suckers', 'Cestodes']],
+                ['Troglotrematidae include important', 'Lung flukes', ['Horse bots', 'Whipworms', 'Mites']]
+            ];
+
+            const nematodeFacts = [
+                ['Haemonchus contortus is commonly called', 'Barber pole worm', ['Liver fluke', 'Lancet fluke', 'Hydatid worm']],
+                ['Haemonchus contortus lives in the', 'Abomasum', ['Rumen', 'Bile duct', 'Pancreatic duct']],
+                ['Haemonchus is important because it is', 'A blood-sucking nematode', ['A cestode without gut', 'A liver fluke with snail host', 'A protozoan parasite']],
+                ['Bottle jaw in haemonchosis is mainly due to', 'Hypoproteinemia and edema', ['Bone fracture', 'Skin allergy', 'Viral infection']],
+                ['Trichostrongyloidea is a', 'Nematode superfamily', ['Cestode family', 'Trematode subclass', 'Snail genus']],
+                ['Ascaridoidea belongs to class', 'Nematoda', ['Cestoda', 'Digenea', 'Acanthocephala']],
+                ['Filarioidea includes worms usually associated with', 'Tissues and vectors', ['Bile ducts only', 'Fish muscles only', 'Plant roots']],
+                ['Oxyuroidea are commonly known as', 'Pinworms', ['Liver flukes', 'Tapeworm larvae', 'Blood protozoa']],
+                ['Rhabditoidea includes', 'Strongyloides-type worms', ['Schistosomes', 'Taenia species', 'Hydatid cysts']],
+                ['Dioctophymatoidea is included under', 'Nemathelminthes / Nematoda', ['Cyclophyllidea', 'Digenea', 'Taeniidae']]
+            ];
+
+            const lectureFacts = [
+                ['Lecture #1 focuses on', 'Helminthology basics', ['Opisthorchiidae only', 'Fish-borne trematodes', 'Haemonchus only']],
+                ['Lectures #1-12 mainly cover', 'Cestodes', ['Nematodes only', 'Arthropods', 'Bacteriology']],
+                ['Lectures #13-19 mainly cover', 'Trematodes', ['Only protozoa', 'Only vectors', 'Bird anatomy']],
+                ['Lectures #20-21 mainly cover', 'Nematodes', ['Cestodes', 'Arthropods', 'Virology']],
+                ['Lecture #15 covers family', 'Fasciolidae', ['Taeniidae', 'Oxyuroidea', 'Davaineidae']],
+                ['Lecture #16 covers family', 'Dicrocoeliidae', ['Anoplocephalidae', 'Mesocestoididae', 'Filarioidea']],
+                ['Lecture #17 covers family', 'Paramphistomatidae', ['Fasciolidae', 'Taeniidae', 'Ascaridoidea']],
+                ['Lecture #18 covers family', 'Opisthorchiidae', ['Hymenolepididae', 'Schistosomatidae', 'Trichuroidea']],
+                ['Lecture #19 covers family', 'Troglotrematidae', ['Dioctophymatoidea', 'Taeniidae', 'Davaineidae']],
+                ['Lecture #21 focuses on', 'Haemonchus contortus', ['Spirometra only', 'Fasciola gigantica only', 'Eurytrema only']]
+            ];
+
+            const speciesFacts = [
+                ['Fasciola gigantica is usually associated with', 'Tropical regions', ['Only polar regions', 'Bird feathers', 'Freshwater fish flesh']],
+                ['Fascioloides magna is especially severe in', 'Sheep', ['Ticks', 'Fish', 'Poultry only']],
+                ['Fasciolopsis buski is found in the', 'Small intestine', ['Abomasum', 'Brain', 'Bronchi']],
+                ['Eurytrema pancreaticum affects the', 'Pancreatic ducts', ['Uterus', 'Heart valves', 'Nasal cavity']],
+                ['Platynosomum fastosum is important in', 'Cats', ['Camels only', 'Horse skin', 'Rabbit ears']],
+                ['Dicrocoelium hospes occurs mainly in', 'Sub-Saharan Africa', ['Arctic waters', 'Australia only', 'Northern ice fields']],
+                ['Schistosoma species are commonly called', 'Blood flukes', ['Rumen worms', 'Pinworms', 'Lung nematodes']],
+                ['Moniezia is a tapeworm mainly of', 'Herbivores', ['Fish only', 'Mosquitoes', 'Snails']],
+                ['Raillietina is especially important in', 'Birds', ['Cattle bile ducts', 'Sheep brain only', 'Horse tendons']],
+                ['Spirometra belongs to order', 'Pseudophyllidea', ['Cyclophyllidea', 'Strongyloidea', 'Filarioidea']]
+            ];
+
+            const allGroups = [helminthFacts, cestodeFacts, trematodeFacts, nematodeFacts, lectureFacts, speciesFacts];
+
+            allGroups.forEach(group => {
+                group.forEach(([stem, correct, wrongs]) => {
+                    addQuestion(stem + '?', [correct].concat(wrongs), correct);
+                    addQuestion('Which option correctly completes: "' + stem + '"?', [correct].concat(wrongs), correct);
+                    addQuestion('Select the correct answer: ' + stem + '.', [correct].concat(wrongs), correct);
+                });
+            });
+
+            const pairs = [
+                ['Fasciola hepatica', 'Fasciolidae'],
+                ['Dicrocoelium dendriticum', 'Dicrocoeliidae'],
+                ['Paramphistomum cervi', 'Paramphistomatidae'],
+                ['Opisthorchis species', 'Opisthorchiidae'],
+                ['Schistosoma species', 'Schistosomatidae'],
+                ['Echinococcus granulosus', 'Taeniidae'],
+                ['Moniezia expansa', 'Anoplocephalidae'],
+                ['Dipylidium caninum', 'Dilepididae'],
+                ['Raillietina species', 'Davaineidae'],
+                ['Hymenolepis species', 'Hymenolepididae'],
+                ['Mesocestoides species', 'Mesocestoididae'],
+                ['Thysanosoma actinioides', 'Thysanosomidae'],
+                ['Haemonchus contortus', 'Trichostrongyloidea'],
+                ['Strongyloides species', 'Rhabditoidea'],
+                ['Ascaris-type worms', 'Ascaridoidea'],
+                ['Oxyuris-type worms', 'Oxyuroidea'],
+                ['Spirurid worms', 'Spiruroidea'],
+                ['Filarial worms', 'Filarioidea'],
+                ['Trichuris-type worms', 'Trichuroidea'],
+                ['Giant kidney worm group', 'Dioctophymatoidea']
+            ];
+
+            pairs.forEach(([item, group]) => {
+                addQuestion(item + ' belongs to which group?', [group, 'Fasciolidae', 'Cyclophyllidea', 'Digenea'], group);
+                addQuestion('Which group includes ' + item + '?', [group, 'Oxyuroidea', 'Davaineidae', 'Troglotrematidae'], group);
+                addQuestion('Match the parasite with the correct family or superfamily: ' + item, [group, 'Schistosomatidae', 'Taeniidae', 'Strongyloidea'], group);
+            });
+        }
+
+        function shuffleArray(array) {
+            const copy = array.slice();
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const temp = copy[i];
+                copy[i] = copy[j];
+                copy[j] = temp;
+            }
+            return copy;
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-questions');
+            container.innerHTML = '';
+            const progress = document.getElementById('quiz-progress');
+            const status = document.getElementById('quiz-status');
+            const item = activeQuizQuestions[currentQuizIndex];
+
+            if (!item) {
+                return;
+            }
+
+            progress.textContent = 'Question ' + (currentQuizIndex + 1) + ' of 20';
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'quiz-question';
+
+            const title = document.createElement('h4');
+            title.innerHTML = (currentQuizIndex + 1) + '. ' + item.question;
+            wrapper.appendChild(title);
+
+            const optionsBox = document.createElement('div');
+            optionsBox.className = 'quiz-options';
+
+            item.shuffledOptions.forEach((option) => {
+                const label = document.createElement('label');
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'current-question';
+                input.value = option;
+                input.checked = userQuizAnswers[currentQuizIndex] === option;
+                input.addEventListener('change', function() {
+                    userQuizAnswers[currentQuizIndex] = option;
+                    updateQuizStatus();
+                    queueAutoAdvance();
+                });
+                label.appendChild(input);
+                label.insertAdjacentText('beforeend', ' ' + option);
+                optionsBox.appendChild(label);
+            });
+
+            wrapper.appendChild(optionsBox);
+            container.appendChild(wrapper);
+            updateQuizStatus();
+            status.textContent = 'Answered ' + userQuizAnswers.filter(Boolean).length + ' of 20 questions';
+        }
+
+        function generateNewTest() {
+            activeQuizQuestions = shuffleArray(quizBank).slice(0, 20).map((item) => {
+                return {
+                    question: item.question,
+                    options: item.options.slice(),
+                    answer: item.answer,
+                    shuffledOptions: shuffleArray(item.options)
+                };
+            });
+            currentQuizIndex = 0;
+            userQuizAnswers = new Array(20).fill('');
+            renderQuiz();
+            resetQuiz();
+        }
+
+        function updateQuizStatus() {
+            const status = document.getElementById('quiz-status');
+            if (status) {
+                status.textContent = 'Answered ' + userQuizAnswers.filter(Boolean).length + ' of 20 questions';
+            }
+        }
+
+        function animateQuizTransition(callback) {
+            const currentCard = document.querySelector('#quiz-questions .quiz-question');
+            if (!currentCard) {
+                callback();
+                return;
+            }
+
+            currentCard.classList.add('is-exiting');
+            setTimeout(callback, 180);
+        }
+
+        function queueAutoAdvance() {
+            if (quizAutoAdvanceTimer) {
+                clearTimeout(quizAutoAdvanceTimer);
+            }
+
+            quizAutoAdvanceTimer = setTimeout(() => {
+                if (currentQuizIndex < activeQuizQuestions.length - 1) {
+                    nextQuestion(true);
+                }
+            }, 260);
+        }
+
+        function nextQuestion(skipAnimation) {
+            const selected = document.querySelector('input[name="current-question"]:checked');
+            if (selected) {
+                userQuizAnswers[currentQuizIndex] = selected.value;
+            }
+            if (currentQuizIndex < activeQuizQuestions.length - 1) {
+                const moveNext = function() {
+                    currentQuizIndex++;
+                    renderQuiz();
+                };
+
+                if (skipAnimation) {
+                    animateQuizTransition(moveNext);
+                } else {
+                    moveNext();
+                }
+            }
+        }
+
+        function previousQuestion() {
+            if (quizAutoAdvanceTimer) {
+                clearTimeout(quizAutoAdvanceTimer);
+            }
+            const selected = document.querySelector('input[name="current-question"]:checked');
+            if (selected) {
+                userQuizAnswers[currentQuizIndex] = selected.value;
+            }
+            if (currentQuizIndex > 0) {
+                animateQuizTransition(function() {
+                    currentQuizIndex--;
+                    renderQuiz();
+                });
+            }
+        }
+
+        function submitQuiz() {
+            if (quizAutoAdvanceTimer) {
+                clearTimeout(quizAutoAdvanceTimer);
+            }
+            let score = 0;
+            let answered = 0;
+
+            const selected = document.querySelector('input[name="current-question"]:checked');
+            if (selected) {
+                userQuizAnswers[currentQuizIndex] = selected.value;
+            }
+
+            activeQuizQuestions.forEach((item, index) => {
+                if (userQuizAnswers[index]) {
+                    answered++;
+                    if (userQuizAnswers[index] === item.answer) {
+                        score++;
+                    }
+                }
+            });
+
+            const resultBox = document.getElementById('quiz-result');
+            const percentage = Math.round((score / 20) * 100);
+            const status = percentage >= 60 ? 'pass' : 'fail';
+            const message = percentage >= 80
+                ? 'Excellent work. Your course revision looks strong.'
+                : percentage >= 60
+                    ? 'Good job. A little more revision will make you even stronger.'
+                    : 'Keep going. Review the lectures again and try one more time.';
+
+            resultBox.className = 'quiz-result show ' + status;
+            resultBox.innerHTML = '<strong>Your Score:</strong> ' + score + ' / 20 (' + percentage + '%)<br>' +
+                '<strong>Answered:</strong> ' + answered + ' / 20<br>' +
+                '<strong>Result:</strong> ' + (percentage >= 60 ? 'Pass' : 'Needs More Practice') + '<br><br>' +
+                message;
+        }
+
+        function resetQuiz() {
+            if (quizAutoAdvanceTimer) {
+                clearTimeout(quizAutoAdvanceTimer);
+            }
+            userQuizAnswers = new Array(20).fill('');
+            currentQuizIndex = 0;
+            const resultBox = document.getElementById('quiz-result');
+            resultBox.className = 'quiz-result';
+            resultBox.innerHTML = '';
+            renderQuiz();
         }
         
         // Show first lecture by default
         window.onload = function() {
+            buildQuizBank();
+            generateNewTest();
             document.getElementById('content-1').classList.add('active');
         };
     </script>
